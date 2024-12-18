@@ -14,8 +14,10 @@ export default async function Home() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-100 to-red-100 py-8">
       <div className="container mx-auto px-4">
-        <h1 className="text-4xl font-bold mb-8 text-center text-blue-800 shadow-text">Toy Builder</h1>
-        <MaterialList materials={materials}/>
+        <h1 className="text-4xl font-bold mb-8 text-center text-red-800 shadow-text flex items-center justify-center">
+          Santa&apos;s Toy Builder
+        </h1>
+        <MaterialList materials={materials} />
       </div>
     </div>
   );
