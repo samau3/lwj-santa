@@ -15,7 +15,7 @@ interface MaterialsWithToys {
 
 export default function PossibleToys({ materials }: PossibleToysProps) {
   function getToysWithMaterials(
-    materialsWithToys: MaterialsWithToys[],
+    materialsWithToys: MaterialsWithToys,
   ): Record<string, string[]> {
     const toysMaterialsMap: Record<string, string[]> = {};
 
@@ -38,7 +38,10 @@ export default function PossibleToys({ materials }: PossibleToysProps) {
   const toysWithMaterials = getToysWithMaterials(materialsWithToys);
 
   // Function to find possible toys based on selected materials
-  function getPossibleToys(selectedMaterials, toysWithMaterials) {
+  function getPossibleToys(
+    selectedMaterials: string[],
+    toysWithMaterials: Record<string, string[]>,
+  ) {
     const possibleToys = [];
 
     // Loop through each toy in the toysWithMaterials map
@@ -64,14 +67,18 @@ export default function PossibleToys({ materials }: PossibleToysProps) {
   return (
     <div className="w-full md:w-1/2 bg-green-50 rounded-lg p-4 border-2 border-green-200">
       <h3 className="text-xl font-semibold mb-2 text-green-800 flex items-center">
-        Santa's Possible Toys:
+        Santa&apos;s Possible Toys:
       </h3>
       {possibleToys.length === 0 ? (
-        <p className="text-red-600 italic">No toys for Santa's sleigh yet!</p>
+        <p className="text-red-600 italic">
+          No toys for Santa&apos;s sleigh yet!
+        </p>
       ) : (
         <ul className="list-disc list-inside">
           {possibleToys.map((toy) => (
-            <li key={toy} className="text-green-700">{toy}</li>
+            <li key={toy} className="text-green-700">
+              {toy}
+            </li>
           ))}
         </ul>
       )}
