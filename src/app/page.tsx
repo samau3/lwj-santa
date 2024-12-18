@@ -1,34 +1,22 @@
-import Link from "next/link";
 import { defineQuery } from "next-sanity";
 
 import { client } from "@/sanity/client";
-import { materialsWithToys } from "./constants";
+import MaterialList from "./components/MaterialList";
 
 const options = { next: { revalidate: 60 } };
 
-const EVENTS_QUERY = defineQuery(`*[
-  _type == "material"]{name, quantity}|order(name asc)`);
+const MATERIALS_QUERY = defineQuery(`*[
+  _type == "material"]{_id, name, quantity}|order(name asc)`);
 
 export default async function Home() {
-  const materials = await client.fetch(EVENTS_QUERY, {}, options);
+  const materials = await client.fetch(MATERIALS_QUERY, {}, options);
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen py-2">
-      <p>Welcome to your Sanity Starter Kit</p>
-      {materials.map((material) => (
-        <div className="p-2 border-2 border-black rounded-md">
-          <p className="font-bold">
-            {material.name} - {material.quantity}
-          </p>
-          <ul>
-            {materialsWithToys[material.name].map((toy) => (
-              <li>
-                {toy.name} - {toy.quantity}
-              </li>
-            ))}
-          </ul>
-        </div>
-      ))}
+    <div className="min-h-screen bg-gradient-to-br from-green-100 to-red-100 py-8">
+      <div className="container mx-auto px-4">
+        <h1 className="text-4xl font-bold mb-8 text-center text-blue-800 shadow-text">Toy Builder</h1>
+        <MaterialList materials={materials}/>
+      </div>
     </div>
   );
 }
